@@ -1,0 +1,26 @@
+<head>
+  <title>maps</title>
+</head>
+
+<body>
+  <div class="map-container">
+    {{> map}}
+  </div>
+
+  <div class="shoutout-container">
+    Shoutouts:
+    <ul>
+      {{> array}}
+    </ul> 
+  </div>
+</body>
+
+<template name="map">  
+  {{> googleMap name="map" options=mapOptions}}
+</template> 
+
+<template name="array">
+  {{#each shoutouts}}
+    <li>{{this}}</li>
+  {{/each}}
+</template>
