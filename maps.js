@@ -75,7 +75,7 @@ if (Meteor.isClient) {
       if (Session.get("this_marker") !== null) {
         return Session.get("this_marker").shoutouts;
       } else {
-        return ["No marker selected", "you nerd"];
+        return ["No marker selected"];
       }
     }
   });
