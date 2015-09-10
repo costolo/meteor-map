@@ -5,7 +5,7 @@ if (Meteor.isClient) {
     GoogleMaps.load();
   });
 
-  var this_marker = null;
+  Session.set("this_marker", null);
 
   Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
@@ -26,8 +26,6 @@ if (Meteor.isClient) {
             id: document._id
           });
 
-          this_marker = Markers.findOne({_id: marker.id});
-
           google.maps.event.addListener(marker, 'dragend', function(event){
             Markers.update(marker.id, {$set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
           });
@@ -37,13 +35,12 @@ if (Meteor.isClient) {
           });
 
           google.maps.event.addListener(marker, 'click', function(event){
-            this_marker = Markers.findOne({_id: marker.id}); 
+            Session.set("this_marker", Markers.findOne({_id: marker.id})); 
             var text = prompt("text here");
             if(text !== null) {
               Markers.update({_id: marker.id}, {$push: {shoutouts: text}});
             }
             Template.array.__helpers.get('shoutouts').call();
-            console.log(this_marker.shoutouts);
           });
 
           markers[document._id] = marker;
@@ -75,8 +72,8 @@ if (Meteor.isClient) {
 
   Template.array.helpers({
     shoutouts: function() {
-      if (this_marker !== null) {
-        return this_marker.shoutouts;
+      if (Session.get("this_marker") !== null) {
+        return Session.get("this_marker").shoutouts;
       } else {
         return ["No marker selected", "you nerd"];
       }
