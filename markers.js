@@ -5,8 +5,8 @@ Markers = {
     return _Markers.findOne({_id: id});
   }, 
 
-  add: function(lat, lng, shoutouts) {
-    _Markers.insert({ lat: lat, lng: lng, shoutouts: []});
+  add: function(lat, lng, text) {
+    _Markers.insert({ lat: lat, lng: lng, text: []});
   },
 
   edit_pos: function(id, lat, lng){
@@ -14,7 +14,7 @@ Markers = {
   },
 
   edit_text: function(id, text) {
-    _Markers.update({_id: id}, {$push: {shoutouts: text}});
+    _Markers.update({_id: id}, {$push: {text: text}});
   },
 
   delete: function(id) {

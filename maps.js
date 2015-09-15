@@ -67,9 +67,9 @@ if (Meteor.isClient) {
   });
 
   Template.array.helpers({
-    shoutouts: function() {
+    markerText: function() {
       if (Session.get("this_marker") !== null) {
-        return Session.get("this_marker").shoutouts;
+        return Session.get("this_marker").text;
       } else {
         return ["No marker selected"];
       }

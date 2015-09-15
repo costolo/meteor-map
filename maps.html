@@ -9,8 +9,8 @@
     </div>
   </div>
   
-  <div class="shoutout-container">
-    Shoutouts:
+  <div class="text-container">
+    Text:
     <ul>
       {{> array}}
     </ul> 
@@ -22,7 +22,7 @@
 </template> 
 
 <template name="array">
-  {{#each shoutouts}}
+  {{#each markerText}}
     <li>{{this}}</li>
   {{/each}}
 </template>
