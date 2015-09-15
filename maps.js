@@ -1,5 +1,3 @@
-Markers = new Mongo.Collection('markers');
-
 if (Meteor.isClient) {
   Meteor.startup(function() {
     GoogleMaps.load();
@@ -11,12 +9,12 @@ if (Meteor.isClient) {
     GoogleMaps.ready('map', function(map) {
 
       google.maps.event.addListener(map.instance, 'click', function(event) {
-        Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng(), shoutouts: []});
+        Markers.add(event.latLng.lat(), event.latLng.lng(), []);
       });
 
       markers = {};
 
-      Markers.find().observe({
+      _Markers.find().observe({
         added: function(document) {
           var marker = new google.maps.Marker({
             draggable: true,
@@ -27,22 +25,21 @@ if (Meteor.isClient) {
           });
 
           google.maps.event.addListener(marker, 'dragend', function(event){
-            Markers.update(marker.id, {$set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
+            Markers.edit_pos(marker.id, event.latLng.lat(), event.latLng.lng());
           });
 
           google.maps.event.addListener(marker, 'rightclick', function(event) {
-            Markers.remove(marker.id);
+            Markers.delete(marker.id);
           });
 
           google.maps.event.addListener(marker, 'click', function(event){
-            Session.set("this_marker", Markers.findOne({_id: marker.id})); 
+            Session.set("this_marker", Markers.get(marker.id)); 
             var text = prompt("text here");
             if(text !== null) {
-              Markers.update({_id: marker.id}, {$push: {shoutouts: text}});
+              Markers.edit_text(marker.id, text);
             }
           });
-
-          markers[document._id] = marker;
+         markers[document._id] = marker;
         },
 
         changed: function(newDocument, oldDocument) {
@@ -53,10 +50,10 @@ if (Meteor.isClient) {
           markers[oldDocument._id].setMap(null);
           google.maps.event.clearInstanceListeners(markers[oldDocument._id]);
           delete markers[oldDocument._id];
-        }
+         }
+       });
       });
     });
-  });
 
   Template.map.helpers({
     mapOptions: function() {
