@@ -40,7 +40,6 @@ if (Meteor.isClient) {
             if(text !== null) {
               Markers.update({_id: marker.id}, {$push: {shoutouts: text}});
             }
-            Template.array.__helpers.get('shoutouts').call();
           });
 
           markers[document._id] = marker;
