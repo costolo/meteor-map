@@ -62,7 +62,7 @@ if (Meteor.isClient) {
     mapOptions: function() {
       if (GoogleMaps.loaded()) {
         return {
-          center: new google.maps.LatLng(35.7889382, -78.6539485),
+          center: new google.maps.LatLng(35.7806, -78.6389),
           zoom: 17
         };
       }
