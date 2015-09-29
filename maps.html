@@ -8,9 +8,12 @@
       {{> map}}
     </div>
   </div>
+
+  <div class="flag">
+    {{> flag}}
+  </div>
   
   <div class="text-container">
-    Text:
     <ul>
       {{> array}}
     </ul> 
@@ -25,4 +28,8 @@
   {{#each markerText}}
     <li>{{this}}</li>
   {{/each}}
+</template>
+
+<template name="flag">
+  {{flagText}}
 </template>
