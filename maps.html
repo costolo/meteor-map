@@ -17,6 +17,14 @@
     <ul>
       {{> array}}
     </ul> 
+
+    <div class="flag">
+      {{> flag}}
+      <div class="row">
+        {{>buttontrue}}
+        {{>buttonfalse}}
+      </div>
+    </div>
   </div>
 </body>
 
@@ -33,3 +41,23 @@
 <template name="flag">
   {{flagText}}
 </template>
+
+<template name="buttontrue">
+  <button id="true" class="btn btn-default">true</button>
+</template>
+
+<template name="buttonfalse">
+  <button id="false" class="btn btn-default">false</button>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
