@@ -7,6 +7,10 @@ userSession = {
     return this.isActive;
   },
 
+  getUserSessionString: function() {
+    return this.isActive.toString();
+  },
+
   setUserSession: function() {
     this.isActive = true;
   },
