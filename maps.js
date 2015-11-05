@@ -75,7 +75,33 @@ if (Meteor.isClient) {
       }
     }
   });
+
+  Template.flag.helpers({
+    flagText: function() {
+      console.log("success????");
+      return userSession.getUserSessionString();
+    }
+  });
+
+  Template.buttontrue.events({
+    'click': function() {
+      userSession.setUserSession();
+      Template.flag.__helpers.get("flagText").call();
+    }
+  });
+
+  Template.buttonfalse.events({
+    'click': function() {
+      userSession.removeUserSession();
+      Template.flag.__helpers.get("flagText").call();
+    }
+  });
 }
+
+
+
+
+
 
 
 
