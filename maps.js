@@ -39,7 +39,7 @@ if (Meteor.isClient) {
               Markers.edit_text(marker.id, text);
             }
           });
-         markers[document._id] = marker;
+          markers[document._id] = marker;
         },
 
         changed: function(newDocument, oldDocument) {
