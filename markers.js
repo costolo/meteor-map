@@ -19,5 +19,9 @@ Markers = {
 
   delete: function(id) {
     _Markers.remove(id);
+  },
+
+  count: function() {
+    return Object.keys(_Markers._collection._docs._map).length;
   }
 };
